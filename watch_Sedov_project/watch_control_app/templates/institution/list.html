@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Список учебных заведений{% endblock title %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'watch_control_app:crew_members_list' %}">Курсанты</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Учебные заведения</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col text-left">
+            <h3>{% include "components/icons/institution.html" %} Учебные заведения</h3>
+        </div>
+
+        <div class="col text-right">
+            {% include "components/buttons/add_btn.html" with btn_title="Добавить" %}
+        </div>
+    </div>
+
+    
+    {{ institutions }}
+    
+{% endblock body %}

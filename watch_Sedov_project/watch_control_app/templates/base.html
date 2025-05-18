@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+    <meta charset="UTF-8">
+    <title>АИС - вахты Седова - {% block title %}{% endblock title %}</title>
+    {% include "components/bs4_head.html" %}
+    {% include "components/fontawesome6.7.2.html" %}
+    </head>
+
+    <body>
+        {% comment %} Врехний навбар {% endcomment %}
+        {% include "components/navbar.html" %}
+        {% comment %} конец навбара {% endcomment %}
+        <div class="container-fluid">
+            <div class="row">  
+                {% include "components/sidebar.html" %}
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    {% comment %} <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> {% endcomment %}
+                        {% block body %}
+                        {% endblock body %}
+                    {% comment %} </div> {% endcomment %}
+                </main>
+            </div>
+            </div>
+
+    </body>
+
+    {% block script %}
+    {% endblock script %}
+</html>
