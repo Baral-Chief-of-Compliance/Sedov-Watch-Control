@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить должность{% endblock title %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'watch_control_app:crew_members_list' %}">Курсанты</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'watch_control_app:post_list' %}">Должности</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Добавить</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            <h3> {% include "components/icons/post.html" %} Добавить должность</h3>
+        </div>
+
+        <form method="post">{% csrf_token %}
+            <div class="card-body">
+                {{ form.p_name }}
+                {{ form.P_priority }}
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-block">Добавить должность</button>
+            </div>
+        </form>
+    </div>
+    
+{% endblock body %}

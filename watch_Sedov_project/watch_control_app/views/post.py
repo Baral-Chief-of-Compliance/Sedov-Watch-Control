@@ -1,6 +1,7 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf.global_settings import LOGIN_URL
+from django.urls import reverse_lazy
 
 from watch_control_app.forms.post import PostForm
 from watch_control_app.models import Post
@@ -25,7 +26,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = tmp_path.add()
-    success_url = get_success_url('post')
+    success_url = reverse_lazy(get_success_url('post'))
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
@@ -35,8 +36,8 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'post_id'
     context_object_name = 'post'
     template_name = tmp_path.update()
-    from_class=PostForm
-    success_url = get_success_url('post')
+    form_class=PostForm
+    success_url = reverse_lazy(get_success_url('post'))
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
@@ -44,8 +45,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     login_url = LOGIN_URL
     model = Post
     pk_url_kwarg = 'post_id'
-    context_object_name = 'post'
-    success_url = get_success_url('post')
+    success_url = reverse_lazy(get_success_url('post'))
 
     def get(self, request, *args, **kwargs):
-        self.post(self, request, *args, **kwargs)
+        return self.post(*args, **kwargs)

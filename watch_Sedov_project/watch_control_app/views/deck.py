@@ -1,6 +1,7 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf.global_settings import LOGIN_URL
+from django.urls import reverse_lazy
 
 from watch_control_app.forms.deck import DeckForm
 from watch_control_app.models import Deck
@@ -25,7 +26,7 @@ class DeckCreateView(LoginRequiredMixin, CreateView):
     model = Deck
     form_class = DeckForm
     template_name = tmp_path.add()
-    success_url = get_success_url('deck')
+    success_url = reverse_lazy(get_success_url('deck'))
 
 
 class DeckUpdateView(LoginRequiredMixin, UpdateView):
@@ -36,7 +37,7 @@ class DeckUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'deck'
     template_name = tmp_path.update()
     form_class = DeckForm
-    success_url = get_success_url('deck')
+    success_url = reverse_lazy(get_success_url('deck'))
 
 
 class DeckDeleteView(LoginRequiredMixin, DeleteView):
@@ -44,8 +45,7 @@ class DeckDeleteView(LoginRequiredMixin, DeleteView):
     login_url = LOGIN_URL
     model = Deck
     pk_url_kwarg = 'deck_id'
-    context_object_name = 'deck'
-    success_url = get_success_url('deck')
+    success_url = reverse_lazy(get_success_url('deck'))
 
     def get(self, request, *args, **kwargs):
-        self.post(self, request, *args, **kwargs)
+        return self.post(*args, **kwargs)

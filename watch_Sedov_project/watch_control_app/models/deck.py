@@ -13,3 +13,4 @@ class Deck(models.Model):
     class Meta:
         verbose_name = 'Палуба Седова'
         verbose_name_plural = 'Палубы Седова'
+        ordering = ['d_prioriter']

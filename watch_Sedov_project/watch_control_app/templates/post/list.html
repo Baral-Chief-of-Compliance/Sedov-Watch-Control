@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Список должностей{% endblock title %}
+
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'watch_control_app:crew_members_list' %}">Курсанты</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Должности</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col text-left">
+            <h3>{% include "components/icons/post.html" %} Должности</h3>
+        </div>
+
+        <div class="col text-right">
+            {% url 'watch_control_app:post_add' as url %}
+            {% include "components/buttons/add_btn.html" with btn_title="Добавить" url_name=url %}
+        </div>
+    </div>
+
+    {% comment %} таблица должностей {% endcomment %}
+    <div class="table-responsive text-center mt-5">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Приоритет должности</th>
+                    <th scope="col">Наименование должности</th>
+                    <th width="10%" scope="col">Редактирование</th>
+                    <th width="10%" scope="col">Удаление</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for p in posts %}
+                        <tr>
+                            <th scope="row">{{p.P_priority}}</th>
+                            <th scope="row">{{p.p_name}}</th>
+                            <td>
+                                {% url 'watch_control_app:post_update' p.id as url %}
+                                {% include "components/buttons/update_btn.html" with url_name=url %}
+                            </td>
+                            <td>
+                                {% include "components/buttons/delete_btn.html" with delete_base="post" delete_id=p.id %}
+                            </td>
+                        </tr>
+                        {% url 'watch_control_app:post_delete' p.id as url %}
+                        {% include "components/modals/delete.html" with delete_base="post" delete_id=p.id name_base="Должность" name=p.p_name url_name=url %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+{% endblock body %}

@@ -10,19 +10,19 @@ class DeckForm(forms.ModelForm):
         fields = '__all__'
         model = Deck
         widgets = {
-            'd_name': TextInputWidget(
-                base_widget=forms.TextInput,
-                label='Наименование палубы',
-                id='d_name'
-            ),
-            'd_prioriter' : TextInputWidget(
-                base_widget=forms.NumberInput,
-                label='Приоритет палубы',
-                id='d_prioriter'
-            ),
-            'd_svg': TextInputWidget(
-                base_widget=forms.FileInput,
-                label='sVG палубы',
-                id='d_svg'
-            )
+            # 'd_name': TextInputWidget(
+            #     base_widget=forms.TextInput,
+            #     label='Наименование палубы',
+            #     id='d_name'
+            # ),
+            # 'd_prioriter' : TextInputWidget(
+            #     base_widget=forms.NumberInput,
+            #     label='Приоритет палубы',
+            #     id='d_prioriter'
+            # ),
+            # 'd_svg': TextInputWidget(
+            #     base_widget=forms.FileInput,
+            #     label='SVG палубы',
+            #     id='id_d_svg'
+            # )
         }

@@ -16,11 +16,40 @@
         </div>
 
         <div class="col text-right">
-            {% include "components/buttons/add_btn.html" with btn_title="Добавить" %}
+            {% url 'watch_control_app:institution_add' as url %}
+            {% include "components/buttons/add_btn.html" with btn_title="Добавить" url_name=url %}
         </div>
     </div>
 
-    
-    {{ institutions }}
+    {% comment %} таблица институтов {% endcomment %}
+    <div class="table-responsive text-center mt-5">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Наименование учебного заведения</th>
+                    <th width="10%" scope="col">Редактирование</th>
+                    <th width="10%" scope="col">Удаление</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in institutions %}
+                        <tr>
+                            <th scope="row">{{i.i_name}}</th>
+                            <td>
+                                {% url 'watch_control_app:institution_update' i.id as url %}
+                                {% include "components/buttons/update_btn.html" with url_name=url %}
+                            </td>
+                            <td>
+                                {% include "components/buttons/delete_btn.html" with delete_base="institut" delete_id=i.id %}
+                            </td>
+                        </tr>
+                        {% url 'watch_control_app:institution_delete' i.id as url %}
+                        {% include "components/modals/delete.html" with delete_base="institut" delete_id=i.id name_base="учебное заведение" name=i.i_name url_name=url %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
     
 {% endblock body %}

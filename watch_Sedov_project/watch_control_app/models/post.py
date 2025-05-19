@@ -13,3 +13,4 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Должность пользователя'
         verbose_name_plural = 'Должности пользователей'
+        ordering = ['P_priority']

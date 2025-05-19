@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Редактировать учебное заведение - {{institution}}{% endblock title %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'watch_control_app:crew_members_list' %}">Курсанты</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'watch_control_app:institution_list' %}">Учебные заведения</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{institution}}</li>
+            <li class="breadcrumb-item active" aria-current="page">Редактировать</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            <h3> {% include "components/icons/institution.html" %} Редактировать учебное заведение "{{institution}}"</h3>
+        </div>
+
+        <form method="post">{% csrf_token %}
+            <div class="card-body">
+                {{ form.i_name }}
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning btn-block">Редактировать учебное заведение</button>
+            </div>
+        </form>
+    </div>
+{% endblock body %}
